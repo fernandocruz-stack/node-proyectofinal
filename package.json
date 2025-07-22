@@ -1,0 +1,20 @@
+{
+  "name": "proyecto_final_modelo1",
+  "version": "1.0.0",
+  "description": "Preparacion de proyecto final",
+  "license": "ISC",
+  "author": "Fernando Cruz Palma",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "firebase": "^12.0.0"
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nombre": "Auriculares Sony Bluetooth Inalámbricos WH-CH520 Negro",
+    "categoria": "audio",
+    "precio": 50000
+  },
+  {
+    "id": 2,
+    "nombre": "Celular Samsung Galaxy A26 5G 8GB 256GB Mint",
+    "categoria": "celulares",
+    "precio": 200000
+  },
+  {
+    "id": 3,
+    "nombre": "Smart TV Samsung 75 Neo QLED 4K QN85D",
+    "categoria": "televisores",
+    "precio": 20000000
+  },
+  {
+    "id": 4,
+    "nombre": "Colchón de Espuma Springwall Mood 140 x 190 cm",
+    "categoria": "colchones",
+    "precio": 260000
+  },
+  {
+    "id": 5,
+    "nombre": "Bicicleta Mountain Bike R29 Razel R0 NG7VR4AU2 T20h",
+    "categoria": "bicicletas",
+    "precio": 300000
+  },
+  {
+    "nombre": "Probando 213123",
+    "categoria": "HOLA",
+    "precio": 120000,
+    "id": 7
+  }
+]

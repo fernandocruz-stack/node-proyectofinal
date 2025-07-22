@@ -1,0 +1,6 @@
+node_modules/
+.env
+npm-debug.log
+# Si tienes una carpeta de logs o build, puedes añadirla también
+# logs/
+# build/
