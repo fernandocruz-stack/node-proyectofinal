@@ -72,18 +72,10 @@ Los datos se almacenan y recuperan desde Firestore, base de datos en la nube de 
     FIREBASE_APP_ID=tu_app_id
 ```
 4. **Ejecutar el servidor** 
-=======
-JWT_SECRET_KEY=tu_clave_secreta_jwt
-FIREBASE_API_KEY=tu_api_key_firebase
-FIREBASE_AUTH_DOMAIN=tu_auth_domain_firebase
-FIREBASE_PROJECT_ID=tu_project_id_firebase
-FIREBASE_STORAGE_BUCKET=tu_storage_bucket_firebase
-FIREBASE_MESSAGING_SENDER_ID=tu_messaging_sender_id
-FIREBASE_APP_ID=tu_app_id
-```
-5. **Ejecutar el servidor** 
->>>>>>> 996554552dc39d33c48ef014502c8d17245ac05c
-    npm start
+npm start
+
+
+ENDPOINTS PRINCIPALES
 
 | Método | Ruta             | Descripción                        | Autenticación |
 | ------ | ---------------- | ---------------------------------- | ------------- |
@@ -94,15 +86,19 @@ FIREBASE_APP_ID=tu_app_id
 | PUT    | `/productos/:id` | Editar un producto existente      | 🔐 Sí         |
 | DELETE | `/productos/:id` | Eliminar un producto               | 🔐 Sí         |
 
-Ejemplo para metodo GET /productos
+Ejemplo para metodo GET /productos de manera local:
 
 GET http://localhost:3000/api/productos/NPVP2U5SrFuF7G0bIkPZ
 
+Deploy de vercel:
+
+https://proyecto-final-ecommerce-fernandocr.vercel.app/api/productos/NPVP2U5SrFuF7G0bIkPZ
 
 **🧪 Cómo autenticar con Postman**
 
 1.  Enviar una petición POST a:
-http://localhost:3000/auth/login
+http://localhost:3000/auth/login (Si el servidor se ejecuta de manera local)
+https://proyecto-final-ecommerce-fernandocr.vercel.app/auth/login (Accediendo al deploy de vercel)
 
 2.  En la pestaña Body, seleccionar raw y JSON, y colocar:
 {
