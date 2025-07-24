@@ -1,76 +1,96 @@
-import { obtenerProductos, buscarProductoPorId,guardarProducto,actualizarProductoPorId,borrarProductoPorId as borrarProductoServicio} from '../services/productos.service.js';
+import {
+  obtenerProductos,
+  buscarProductoPorId,
+  guardarProducto,
+  actualizarProductoPorId,
+  borrarProductoPorId as borrarProductoServicio
+} from '../models/productos.models.js';
 
-export async function listarProductos(req, res) {
+export async function listarProductos(req, res, next) {
   try {
     const productos = await obtenerProductos();
     res.status(200).json(productos);
   } catch (error) {
-    res.status(500).json({ message: 'Error al obtener productos' });
+    next(error);
   }
 }
 
-export async function obtenerProductoPorId(req, res) {
-  const id = parseInt(req.params.id);
-  const producto = await buscarProductoPorId(id);
-
-  if (producto) {
-    res.status(200).json(producto);
-  } else {
-    res.status(404).json({ message: "Producto no encontrado" });
-  }
-}
-
-export async function crearProducto(req, res) {
-  const nuevoProducto = req.body;
-  //Intento de validacion
-  if (!nuevoProducto.nombre || !nuevoProducto.categoria || !nuevoProducto.precio) {
-    return res.status(400).json({ message: 'Faltan campos necesarios' });
-    }
+export async function obtenerProductoPorId(req, res, next) {
   try {
-    const productoCreado = await guardarProducto(nuevoProducto);
+    const id = req.params.id;
+    const producto = await buscarProductoPorId(id);
 
+    if (!producto) {
+      const error = new Error('Producto no encontrado');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    res.status(200).json(producto);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function crearProducto(req, res, next) {
+  try {
+    const nuevoProducto = req.body;
+
+    if (!nuevoProducto.nombre || !nuevoProducto.categoria || !nuevoProducto.precio) {
+      const error = new Error('Faltan campos necesarios');
+      error.statusCode = 400;
+      throw error;
+    }
+
+    const productoCreado = await guardarProducto(nuevoProducto);
     res.status(201).json(productoCreado);
   } catch (error) {
-    res.status(500).json({ message: 'Error al guardar el producto' });
+    next(error);
   }
 }
 
-
-export async function actualizarProducto(req, res) {
-  const id = parseInt(req.params.id);
-  const datosActualizados = req.body;
-
-  
-  if (!datosActualizados.nombre || !datosActualizados.categoria || !datosActualizados.precio) {
-    return res.status(400).json({ message: 'Faltan campos necesarios' });
-  }
-
+export async function actualizarProducto(req, res, next) {
   try {
-    const productoActualizado = await actualizarProductoPorId(id, datosActualizados);
+    const id = req.params.id;
+    const datosActualizados = req.body;
 
-    if (productoActualizado) {
-      res.status(200).json(productoActualizado);
-    } else {
-      res.status(404).json({ message: 'Producto no encontrado' });
+    if (!datosActualizados.nombre || !datosActualizados.categoria || !datosActualizados.precio) {
+      const error = new Error('Faltan campos necesarios');
+      error.statusCode = 400;
+      throw error;
     }
 
+    const productoActualizado = await actualizarProductoPorId(id, datosActualizados);
+
+    if (!productoActualizado) {
+      const error = new Error('Producto no encontrado');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    res.status(200).json({
+      mensaje: 'Se ha editado los valores del siguiente producto:',
+      producto: productoActualizado
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Error al actualizar el producto' });
+    next(error);
   }
 }
 
-export async function borrarProductoPorId(req, res) {
+
+export async function borrarProductoPorId(req, res, next) {
   try {
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
     const producto = await borrarProductoServicio(id);
 
     if (!producto) {
-      return res.status(404).json({ error: "Producto no encontrado" });
+      const error = new Error('Producto no encontrado');
+      error.statusCode = 404;
+      throw error;
     }
 
     res.json({ mensaje: "Se ha eliminado el siguiente producto: ", producto });
   } catch (error) {
-    res.status(500).json({ error: "Error al eliminar el producto" });
+    next(error);
   }
 }
-

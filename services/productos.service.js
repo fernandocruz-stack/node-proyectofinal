@@ -1,91 +1,72 @@
-import { readFile,writeFile } from "fs/promises";
-import path from 'path';
+//HAY QUE BORRAR ESTO
 
-const RUTA = "./productos.json";
+import { db } from "../firebase/firebase.config.js";
+import {
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  setDoc,
 
-//OBTENER PRODUCTO 
+} from 'firebase/firestore';
+
+//Funciona
 
 export async function obtenerProductos() {
-  const data = await readFile(RUTA, 'utf-8');
-  //console.log(obtenerProductos)
-  return JSON.parse(data);
+  const productosRef = collection(db, "productos");
+  const snapshot = await getDocs(productosRef);
+  const productos = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+  return productos;
 }
 
-//OBTENER PRODUCTO POR SU ID
+//Funciona explicitamente con el nombre del archivo/id que da firebase o el cargado anteriormente
 
 export async function buscarProductoPorId(id) {
-  const productos = await obtenerProductos();
-  return productos.find(producto => producto.id == id);
-}
-
-//GUARDAR PRODUCTO
-
-export async function guardarProducto(nuevoProducto) {
-
-  const data = await readFile(RUTA, 'utf-8');
-  const productos = JSON.parse(data);
-  
-  let maxId;
-  if (productos.length > 0) {
-
-    const ids = productos.map(function(producto) {
-      return producto.id;
-    });
-    maxId = Math.max(...ids);
-  } else {
-    maxId = 0;
+  const docRef = doc(db, "productos", id);
+  const producto = await getDoc(docRef);
+  if (producto.exists()) {
+    return { id: producto.id, ...producto.data() };
   }
-  
-  nuevoProducto.id = maxId + 1;
-
-  productos.push(nuevoProducto);
-  await writeFile(RUTA, JSON.stringify(productos, null, 2));
-  //await writeFile(RUTA, JSON.stringify(productos, null, 1));
-  return nuevoProducto;
+  return null;
 }
 
-//ACTUALIZAR UN PRODUCTO POR SU ID
+//POST PARA AÑADIR  PATCH NO LO USE
 
-export async function actualizarProductoPorId(id, datosActualizados) {
-  const data = await readFile(RUTA, 'utf-8');
-  const productos = JSON.parse(data);
 
-  const index = productos.findIndex(function(producto) {
-    return producto.id === id;
-  })
-  ;
-
-  if (index === -1) {
-    return null;
-  }
-
-  productos[index] = {
-    id: id,
-    nombre: datosActualizados.nombre,
-    categoria: datosActualizados.categoria,
-    precio: datosActualizados.precio
-  };
-
-  await writeFile(RUTA, JSON.stringify(productos, null, 2));
-  return productos[index];
+export async function guardarProducto(datos) {
+  const productosRef = collection(db, "productos");
+  const nuevoDoc = await addDoc(productosRef, datos);
+  const nuevoProducto = await getDoc(nuevoDoc);
+  return { id: nuevoProducto.id, ...nuevoProducto.data() };
 }
 
-//BORRAR PRODUCTO
+//PUT PARA ACTUALIZAR
+
+export async function actualizarProductoPorId(id, datos) {
+  const docRef = doc(db, "productos", id);
+  const productoExistente = await getDoc(docRef);
+  if (!productoExistente.exists()) return null;
+
+  await setDoc(docRef, datos, { merge: true }); // mergea los campos nuevos
+  const actualizado = await getDoc(docRef);
+  return { id: actualizado.id, ...actualizado.data() };
+}
+
+
+
 
 export async function borrarProductoPorId(id) {
-  const data = await readFile(RUTA, 'utf-8');
-  const productos = JSON.parse(data);
+  const docRef = doc(db, "productos", id);
+  const productoExistente = await getDoc(docRef);
+  if (!productoExistente.exists()) return null;
 
-  const index = productos.findIndex(producto => producto.id === id);
-
-  if (index === -1) {
-    return null
-    ;
-  }
-
-  const productoEliminado = productos.splice(index, 1)[0];
-
-  await writeFile(RUTA, JSON.stringify(productos, null, 2));
-
-  return productoEliminado;
+  await deleteDoc(docRef);
+  return { id, ...productoExistente.data() };
 }
+//
