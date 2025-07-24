@@ -26,27 +26,27 @@ Los datos se almacenan y recuperan desde Firestore, base de datos en la nube de 
 ---
 
 ## 📁 Estructura del proyecto
-
-proyecto-base/
-├── index.js
-├── .env
-├── package.json
-├── /controllers
-│ ├── auth.controllers.js
-│ └── productos.controllers.js
-├── /routes
-│ ├── auth.routes.js
-│ └── productos.routes.js
-├── /models
-│ └── productos.models.js
-├── /middlewares
-│ ├── auth.authentication.js
-│ └── manejoDeErrores.js
-├── /utils
-│ └── token-generator.js
-└── /firebase
-└── firebase.config.js
-
+```
+    proyecto-base/
+    ├── index.js
+    ├── .env
+    ├── package.json
+    ├── /controllers
+    │ ├── auth.controllers.js
+    │ └── productos.controllers.js
+    ├── /routes
+    │ ├── auth.routes.js
+    │ └── productos.routes.js
+    ├── /models
+    │ └── productos.models.js
+    ├── /middlewares
+    │ ├── auth.authentication.js
+    │ └── manejoDeErrores.js
+    ├── /utils
+    │ └── token-generator.js
+    └── /firebase
+    └── firebase.config.js
+```
 
 ---
 
@@ -78,8 +78,12 @@ proyecto-base/
 | GET    | `/productos`     | Obtener todos los productos        | 🔐 Sí         |
 | GET    | `/productos/:id` | Obtener producto por ID            | 🔐 Sí         |
 | POST   | `/productos`     | Crear un producto nuevo            | 🔐 Sí         |
-| PUT    | `/productos/:id` | Editar un producto existente       | 🔐 Sí         |
+| PUT    | `/productos/:id` | Editar un producto existente      | 🔐 Sí         |
 | DELETE | `/productos/:id` | Eliminar un producto               | 🔐 Sí         |
+
+Ejemplo para metodo GET /productos
+
+GET http://localhost:3000/api/productos/NPVP2U5SrFuF7G0bIkPZ
 
 
 **🧪 Cómo autenticar con Postman**
