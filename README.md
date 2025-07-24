@@ -60,7 +60,7 @@ Los datos se almacenan y recuperan desde Firestore, base de datos en la nube de 
 2. **Instalar dependencias**
     npm install
 
-3. **Crear archivo .env con las siguientes variables**
+3. **Crear archivo `.env` con las siguientes variables:**
     JWT_SECRET_KEY=tu_clave_secreta_jwt
     FIREBASE_API_KEY=tu_api_key_firebase
     FIREBASE_AUTH_DOMAIN=tu_auth_domain_firebase
