@@ -62,6 +62,7 @@ Los datos se almacenan y recuperan desde Firestore, base de datos en la nube de 
 
 3. **Crear archivo `.env` con las siguientes variables:**
 ```
+<<<<<<< HEAD
     JWT_SECRET_KEY=tu_clave_secreta_jwt
     FIREBASE_API_KEY=tu_api_key_firebase
     FIREBASE_AUTH_DOMAIN=tu_auth_domain_firebase
@@ -71,6 +72,17 @@ Los datos se almacenan y recuperan desde Firestore, base de datos en la nube de 
     FIREBASE_APP_ID=tu_app_id
 ```
 4. **Ejecutar el servidor** 
+=======
+JWT_SECRET_KEY=tu_clave_secreta_jwt
+FIREBASE_API_KEY=tu_api_key_firebase
+FIREBASE_AUTH_DOMAIN=tu_auth_domain_firebase
+FIREBASE_PROJECT_ID=tu_project_id_firebase
+FIREBASE_STORAGE_BUCKET=tu_storage_bucket_firebase
+FIREBASE_MESSAGING_SENDER_ID=tu_messaging_sender_id
+FIREBASE_APP_ID=tu_app_id
+```
+5. **Ejecutar el servidor** 
+>>>>>>> 996554552dc39d33c48ef014502c8d17245ac05c
     npm start
 
 | Método | Ruta             | Descripción                        | Autenticación |
