@@ -61,15 +61,16 @@ Los datos se almacenan y recuperan desde Firestore, base de datos en la nube de 
     npm install
 
 3. **Crear archivo `.env` con las siguientes variables:**
-    JWT_SECRET_KEY=tu_clave_secreta_jwt
-    FIREBASE_API_KEY=tu_api_key_firebase
-    FIREBASE_AUTH_DOMAIN=tu_auth_domain_firebase
-    FIREBASE_PROJECT_ID=tu_project_id_firebase
-    FIREBASE_STORAGE_BUCKET=tu_storage_bucket_firebase
-    FIREBASE_MESSAGING_SENDER_ID=tu_messaging_sender_id
-    FIREBASE_APP_ID=tu_app_id
-
-4. **Ejecutar el servidor** 
+```
+JWT_SECRET_KEY=tu_clave_secreta_jwt
+FIREBASE_API_KEY=tu_api_key_firebase
+FIREBASE_AUTH_DOMAIN=tu_auth_domain_firebase
+FIREBASE_PROJECT_ID=tu_project_id_firebase
+FIREBASE_STORAGE_BUCKET=tu_storage_bucket_firebase
+FIREBASE_MESSAGING_SENDER_ID=tu_messaging_sender_id
+FIREBASE_APP_ID=tu_app_id
+```
+5. **Ejecutar el servidor** 
     npm start
 
 | Método | Ruta             | Descripción                        | Autenticación |
